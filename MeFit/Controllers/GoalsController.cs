@@ -6,11 +6,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeFit.Models;
+using System.Net.Mime;
 
 namespace MeFit.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/goals")]
     [ApiController]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     public class GoalsController : ControllerBase
     {
         private readonly MeFitDBContext _context;
@@ -21,6 +25,10 @@ namespace MeFit.Controllers
         }
 
         // GET: api/Goals
+        /// <summary>
+        /// Get all Goals 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Goal>>> GetGoals()
         {
@@ -28,6 +36,11 @@ namespace MeFit.Controllers
         }
 
         // GET: api/Goals/5
+        /// <summary>
+        /// Get Goals by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Goal>> GetGoal(int id)
         {
@@ -43,6 +56,12 @@ namespace MeFit.Controllers
 
         // PUT: api/Goals/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Edit Goal by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="goal"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGoal(int id, Goal goal)
         {
@@ -74,6 +93,11 @@ namespace MeFit.Controllers
 
         // POST: api/Goals
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Add Goal
+        /// </summary>
+        /// <param name="goal"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<Goal>> PostGoal(Goal goal)
         {
@@ -84,6 +108,11 @@ namespace MeFit.Controllers
         }
 
         // DELETE: api/Goals/5
+        /// <summary>
+        /// Delete Goal by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGoal(int id)
         {

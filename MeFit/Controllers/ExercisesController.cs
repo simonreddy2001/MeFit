@@ -6,11 +6,17 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeFit.Models;
+using System.Net.Mime;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MeFit.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/exercises")]
     [ApiController]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     public class ExercisesController : ControllerBase
     {
         private readonly MeFitDBContext _context;
@@ -21,6 +27,11 @@ namespace MeFit.Controllers
         }
 
         // GET: api/Exercises
+        /// <summary>
+        /// Get all Exercises
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Exercise>>> GetExercises()
         {
@@ -28,6 +39,11 @@ namespace MeFit.Controllers
         }
 
         // GET: api/Exercises/5
+        /// <summary>
+        /// Get Exercise by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Exercise>> GetExercise(int id)
         {
@@ -43,6 +59,12 @@ namespace MeFit.Controllers
 
         // PUT: api/Exercises/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Edit Exercise byId
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="exercise"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutExercise(int id, Exercise exercise)
         {
@@ -74,6 +96,11 @@ namespace MeFit.Controllers
 
         // POST: api/Exercises
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Add Exercise 
+        /// </summary>
+        /// <param name="exercise"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<Exercise>> PostExercise(Exercise exercise)
         {
@@ -84,6 +111,11 @@ namespace MeFit.Controllers
         }
 
         // DELETE: api/Exercises/5
+        /// <summary>
+        /// Delete Exercise by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteExercise(int id)
         {

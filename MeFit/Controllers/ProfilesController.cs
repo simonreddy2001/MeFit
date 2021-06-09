@@ -6,11 +6,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeFit.Models;
+using System.Net.Mime;
 
 namespace MeFit.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/profiles")]
     [ApiController]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     public class ProfilesController : ControllerBase
     {
         private readonly MeFitDBContext _context;
@@ -21,6 +25,10 @@ namespace MeFit.Controllers
         }
 
         // GET: api/Profiles
+        /// <summary>
+        /// Get all Profiles
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Profile>>> GetProfiles()
         {
@@ -28,6 +36,11 @@ namespace MeFit.Controllers
         }
 
         // GET: api/Profiles/5
+        /// <summary>
+        /// Get Profile by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Profile>> GetProfile(int id)
         {
@@ -43,6 +56,12 @@ namespace MeFit.Controllers
 
         // PUT: api/Profiles/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Edit Profile by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="profile"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProfile(int id, Profile profile)
         {
@@ -74,6 +93,11 @@ namespace MeFit.Controllers
 
         // POST: api/Profiles
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Add Profile 
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<Profile>> PostProfile(Profile profile)
         {
@@ -84,6 +108,11 @@ namespace MeFit.Controllers
         }
 
         // DELETE: api/Profiles/5
+        /// <summary>
+        /// Delete Profile by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProfile(int id)
         {

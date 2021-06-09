@@ -4,14 +4,16 @@ using MeFit.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MeFit.Migrations
 {
     [DbContext(typeof(MeFitDBContext))]
-    partial class MeFitDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210608140244_controlers")]
+    partial class controlers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,56 +49,6 @@ namespace MeFit.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Addresses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AddressLine1 = "Drammensveien 1",
-                            City = "Oslo",
-                            Country = "Norway",
-                            PostalCode = 2700
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AddressLine1 = "1st Avenue 45",
-                            City = "Leeds, AL",
-                            Country = "USA",
-                            PostalCode = 4600
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AddressLine1 = "Skaugumsåsen 1",
-                            City = "Asker",
-                            Country = "Norway",
-                            PostalCode = 4500
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AddressLine1 = "Lakkegata 14B",
-                            City = "Oslo",
-                            Country = "Norway",
-                            PostalCode = 2000
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AddressLine1 = "Gran Vía 100",
-                            City = "Madrid",
-                            Country = "Spain",
-                            PostalCode = 6000
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AddressLine1 = "Granskauen 1050F",
-                            City = "Hønefoss",
-                            Country = "Norway",
-                            PostalCode = 4500
-                        });
                 });
 
             modelBuilder.Entity("MeFit.Models.Exercise", b =>
@@ -124,32 +76,6 @@ namespace MeFit.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Exercises");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Skip on one foot for 10 seconds, than repeat on the other foot.",
-                            Image = "",
-                            Name = "Skips",
-                            VidLink = ""
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Lay on your back, bring your arms behind your head and lift your torso before you slowly lower it again.",
-                            Image = "",
-                            Name = "Sit-Ups",
-                            VidLink = ""
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Lay faced down, bring your hands to the floor on both sides next to your chest, lift your body so only your hands and toes touch the floor. When your arms are straight, lower your body steady to the floor again.",
-                            Image = "",
-                            Name = "Push-Ups",
-                            VidLink = ""
-                        });
                 });
 
             modelBuilder.Entity("MeFit.Models.Goal", b =>
@@ -171,15 +97,6 @@ namespace MeFit.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Goals");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Achieved = false,
-                            EndDate = new DateTime(2021, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProgramId = 1
-                        });
                 });
 
             modelBuilder.Entity("MeFit.Models.GoalWorkout", b =>
@@ -192,9 +109,6 @@ namespace MeFit.Migrations
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.HasKey("GoalId", "WorkoutId");
 
@@ -257,68 +171,6 @@ namespace MeFit.Migrations
                     b.HasIndex("WorkoutId");
 
                     b.ToTable("Profiles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AddressId = 1,
-                            Disabilities = "Dysleksia, transplanted hip",
-                            Height = 187.0,
-                            MedicalConditions = "Weak heart",
-                            UserId = 1,
-                            Weight = 94.5
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AddressId = 2,
-                            Disabilities = "",
-                            Height = 198.0,
-                            MedicalConditions = "",
-                            UserId = 2,
-                            Weight = 114.5
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AddressId = 3,
-                            Disabilities = "",
-                            Height = 193.0,
-                            MedicalConditions = "",
-                            UserId = 3,
-                            Weight = 100.5
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AddressId = 4,
-                            Disabilities = "",
-                            Height = 187.0,
-                            MedicalConditions = "",
-                            UserId = 4,
-                            Weight = 94.5
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AddressId = 5,
-                            Disabilities = "",
-                            Height = 198.0,
-                            MedicalConditions = "",
-                            UserId = 5,
-                            Weight = 114.5
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AddressId = 6,
-                            Disabilities = "",
-                            Height = 170.0,
-                            MedicalConditions = "",
-                            UserId = 6,
-                            Weight = 62.0
-                        });
                 });
 
             modelBuilder.Entity("MeFit.Models.Program", b =>
@@ -328,7 +180,7 @@ namespace MeFit.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Category")
+                    b.Property<string>("Catagory")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -337,20 +189,6 @@ namespace MeFit.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Programs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Category = "Nomal people",
-                            Name = "Basic Core Program"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Category = "Nomal people less chest",
-                            Name = "Basic Chest Program"
-                        });
                 });
 
             modelBuilder.Entity("MeFit.Models.ProgramWorkout", b =>
@@ -359,9 +197,6 @@ namespace MeFit.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("WorkoutId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.HasKey("ProgramId", "WorkoutId");
@@ -381,7 +216,7 @@ namespace MeFit.Migrations
                     b.Property<int>("ExerciseId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ExerciseRepetitions")
+                    b.Property<int>("ExerciseRepititions")
                         .HasColumnType("int");
 
                     b.Property<int>("WorkoutId")
@@ -394,36 +229,6 @@ namespace MeFit.Migrations
                     b.HasIndex("WorkoutId");
 
                     b.ToTable("Sets");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ExerciseId = 1,
-                            ExerciseRepetitions = 10,
-                            WorkoutId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ExerciseId = 2,
-                            ExerciseRepetitions = 10,
-                            WorkoutId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ExerciseId = 1,
-                            ExerciseRepetitions = 10,
-                            WorkoutId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ExerciseId = 2,
-                            ExerciseRepetitions = 10,
-                            WorkoutId = 1
-                        });
                 });
 
             modelBuilder.Entity("MeFit.Models.User", b =>
@@ -432,9 +237,6 @@ namespace MeFit.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -448,74 +250,12 @@ namespace MeFit.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Role")
+                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "harald.rex@kongehuset.no",
-                            FirstName = "Harald",
-                            IsAdmin = false,
-                            IsContributor = false,
-                            LastName = "Rex",
-                            Role = "Admin"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Email = "charles.barkley@nba.com",
-                            FirstName = "Charles",
-                            IsAdmin = false,
-                            IsContributor = false,
-                            LastName = "Barkley",
-                            Role = "Contributer, Admin"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Email = "haakon.magnus@kongehuset.no",
-                            FirstName = "Haakon Magnus",
-                            IsAdmin = false,
-                            IsContributor = false,
-                            LastName = "Crown Prince of Norway",
-                            Role = "User, Contributer, Admin"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Email = "j_johansen@hotmail.com",
-                            FirstName = "Jan",
-                            IsAdmin = false,
-                            IsContributor = false,
-                            LastName = "Johansen",
-                            Role = "User, Contributer, Admin"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Email = "martinmann@gmail.com",
-                            FirstName = "Martin",
-                            IsAdmin = false,
-                            IsContributor = false,
-                            LastName = "Ødegaard",
-                            Role = "User, Contributer, Admin"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Email = "kari.nordmann@ciber.no",
-                            FirstName = "Kari",
-                            IsAdmin = false,
-                            IsContributor = false,
-                            LastName = "Nordmann",
-                            Role = "Contributer, Admin"
-                        });
                 });
 
             modelBuilder.Entity("MeFit.Models.Workout", b =>
@@ -540,24 +280,6 @@ namespace MeFit.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Workouts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Complete = false,
-                            Name = "Basic Circle Workout",
-                            SetId = 1,
-                            Type = "arms"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Complete = false,
-                            Name = "Basic Square Workout",
-                            SetId = 1,
-                            Type = "legs"
-                        });
                 });
 
             modelBuilder.Entity("MeFit.Models.GoalWorkout", b =>

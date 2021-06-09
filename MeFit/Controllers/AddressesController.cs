@@ -6,11 +6,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeFit.Models;
+using System.Net.Mime;
 
 namespace MeFit.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/addresses")]
     [ApiController]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     public class AddressesController : ControllerBase
     {
         private readonly MeFitDBContext _context;
@@ -19,8 +23,12 @@ namespace MeFit.Controllers
         {
             _context = context;
         }
-
+        
         // GET: api/Addresses
+        /// <summary>
+        /// Get all Addresses
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Address>>> GetAddresses()
         {
@@ -28,6 +36,11 @@ namespace MeFit.Controllers
         }
 
         // GET: api/Addresses/5
+        /// <summary>
+        /// Get Address by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Address>> GetAddress(int id)
         {
@@ -43,6 +56,12 @@ namespace MeFit.Controllers
 
         // PUT: api/Addresses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Edit Address by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="address"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAddress(int id, Address address)
         {
@@ -74,6 +93,11 @@ namespace MeFit.Controllers
 
         // POST: api/Addresses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Add Address
+        /// </summary>
+        /// <param name="address"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<Address>> PostAddress(Address address)
         {
@@ -84,6 +108,11 @@ namespace MeFit.Controllers
         }
 
         // DELETE: api/Addresses/5
+        /// <summary>
+        /// Delete Address by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAddress(int id)
         {
