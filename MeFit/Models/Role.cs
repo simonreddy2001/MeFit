@@ -10,6 +10,6 @@ namespace MeFit.Models
         public const string Admin = "Admin";
         public const string Contributer = "Contributer, Admin";
         public const string User = "User, Contributer, Admin";
-
+        //
     }
 }

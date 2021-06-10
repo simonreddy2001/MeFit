@@ -38,8 +38,8 @@ namespace MeFit.Models
                new Address { Id = 6, AddressLine1 = "Granskauen 1050F", City = "Hønefoss", Country = "Norway", PostalCode = 4500 }
            );
 
-            modelBuilder.Entity<Models.Profile>().HasData(
-               new Models.Profile
+            modelBuilder.Entity<Profile>().HasData(
+               new Profile
                {
                    Id = 1,
                    AddressId = 1,
@@ -49,7 +49,7 @@ namespace MeFit.Models
                    Weight = 94.5,
                    Height = 187.0,
                },
-               new Models.Profile
+               new Profile
                {
                    Id = 2,
                    AddressId = 2,
@@ -59,7 +59,7 @@ namespace MeFit.Models
                    Weight = 114.5,
                    Height = 198.0,
                },
-               new Models.Profile
+               new Profile
                {
                    Id = 3,
                    AddressId = 3,
@@ -69,7 +69,7 @@ namespace MeFit.Models
                    Weight = 100.5,
                    Height = 193.0,
                },
-               new Models.Profile
+               new Profile
                {
                    Id = 4,
                    AddressId = 4,
@@ -79,7 +79,7 @@ namespace MeFit.Models
                    Weight = 94.5,
                    Height = 187.0,
                },
-               new Models.Profile
+               new Profile
                {
                    Id = 5,
                    AddressId = 5,
@@ -89,7 +89,7 @@ namespace MeFit.Models
                    Weight = 114.5,
                    Height = 198.0,
                },
-               new Models.Profile
+               new Profile
                {
                    Id = 6,
                    AddressId = 6,
@@ -100,7 +100,6 @@ namespace MeFit.Models
                    Height = 170,
                }
            );
-
 
             modelBuilder.Entity<Exercise>().HasData(
                 new Exercise
@@ -236,14 +235,14 @@ namespace MeFit.Models
                }
            );
 
-            modelBuilder.Entity<Models.Program>().HasData(
-               new Models.Program
+            modelBuilder.Entity<Program>().HasData(
+               new Program
                {
                    Id = 1,
                    Name = "Basic Core Program",
                    Category = "Nomal people"
                },
-                new Models.Program
+                new Program
                 {
                     Id = 2,
                     Name = "Basic Chest Program",
@@ -266,10 +265,7 @@ namespace MeFit.Models
                      Type = "legs",
                      SetId = 1
                  }
-            );
-           
+            );           
         }
-
-
     }
 }

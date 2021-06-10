@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeFit.Migrations
 {
     [DbContext(typeof(MeFitDBContext))]
-    [Migration("20210609115328_seededData")]
-    partial class seededData
+    [Migration("20210609184441_InitialDB")]
+    partial class InitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
