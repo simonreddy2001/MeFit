@@ -61,7 +61,7 @@ namespace MeFit
                     ValidAudience = "account"
                 };
             });
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllers();
             
             services.AddSwaggerGen(c =>
             {
