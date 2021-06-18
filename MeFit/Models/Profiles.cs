@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MeFit.Models
 {
-    public class Profile
+    public class Profiles
     {
         [Key] 
         public int Id { get; set; }
@@ -17,7 +17,7 @@ namespace MeFit.Models
         public int? AddressId { get; set; }
         public Address Address { get; set; }
         public int? ProgramId { get; set; }
-        public Program Program { get; set; }
+        public Programs Program { get; set; }
         public int? WorkoutId { get; set; }
         public Workout Workout { get; set; }
         public int? SetId { get; set; }

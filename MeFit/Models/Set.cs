@@ -16,6 +16,6 @@ namespace MeFit.Models
         public int WorkoutId { get; set; }
         public Workout Workout { get; set; }
         // Not using this relation
-        public ICollection<Profile> Profiles { get; set; }
+        public ICollection<Profiles> Profiles { get; set; }
     }
 }

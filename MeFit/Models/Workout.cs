@@ -14,7 +14,7 @@ namespace MeFit.Models
         public string Type { get; set; }
         public bool Complete { get; set; }
         public int? SetId { get; set; }
-        public ICollection<Profile> Profiles { get; set; }
+        public ICollection<Profiles> Profiles { get; set; }
         public ICollection<Set> Sets { get; set; }
         public ICollection<GoalWorkout> GoalWorkouts { get; set; }
     }

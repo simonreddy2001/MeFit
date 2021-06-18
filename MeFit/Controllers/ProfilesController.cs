@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeFit.Models;
 using System.Net.Mime;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace MeFit.Controllers
 {
@@ -30,7 +31,7 @@ namespace MeFit.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Profile>>> GetProfiles()
+        public async Task<ActionResult<IEnumerable<Models.Profiles>>> GetProfiles()
         {
             return await _context.Profiles.ToListAsync();
         }
@@ -42,7 +43,7 @@ namespace MeFit.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<Profile>> GetProfile(int id)
+        public async Task<ActionResult<Models.Profiles>> GetProfile(int id)
         {
             var profile = await _context.Profiles.FindAsync(id);
 
@@ -63,7 +64,7 @@ namespace MeFit.Controllers
         /// <param name="profile"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProfile(int id, Profile profile)
+        public async Task<IActionResult> PutProfile(int id, Models.Profiles profile)
         {
             if (id != profile.Id)
             {
@@ -99,7 +100,7 @@ namespace MeFit.Controllers
         /// <param name="profile"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<Profile>> PostProfile(Profile profile)
+        public async Task<ActionResult<Models.Profiles>> PostProfile(Models.Profiles profile)
         {
             _context.Profiles.Add(profile);
             await _context.SaveChangesAsync();
@@ -128,6 +129,38 @@ namespace MeFit.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Execute a partial update of the corresponding Profile
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="profileUpdates"></param>
+        /// <returns></returns>
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<Models.Profiles>> PatchProfile(int id, JsonPatchDocument<Models.Profiles> profileUpdates)
+        {
+            var profile = await _context.Profiles.FindAsync(id);
+            if (id != profile.Id)
+            {
+                return BadRequest();
+            }
+            profileUpdates.ApplyTo(profile);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProfileExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return NoContent();
+        }
         private bool ProfileExists(int id)
         {
             return _context.Profiles.Any(e => e.Id == id);

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeFit.Models;
 using System.Net.Mime;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace MeFit.Controllers
 {
@@ -125,6 +126,39 @@ namespace MeFit.Controllers
             _context.Addresses.Remove(address);
             await _context.SaveChangesAsync();
 
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Patch the Address
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="addressUpdates"></param>
+        /// <returns></returns>
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<Address>> PatchAddress(int id, JsonPatchDocument<Address> addressUpdates)
+        {
+            var address = await _context.Addresses.FindAsync(id);
+            if (id != address.Id)
+            {
+                return BadRequest();
+            }
+            addressUpdates.ApplyTo(address);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AddressExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
             return NoContent();
         }
 

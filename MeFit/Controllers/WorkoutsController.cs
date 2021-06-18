@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeFit.Models;
 using System.Net.Mime;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace MeFit.Controllers
 {
@@ -125,6 +126,39 @@ namespace MeFit.Controllers
             _context.Workouts.Remove(workout);
             await _context.SaveChangesAsync();
 
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Patch the Workout
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="workoutUpdates"></param>
+        /// <returns></returns>
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<Workout>> PatchWorkout(int id, JsonPatchDocument<Workout> workoutUpdates)
+        {
+            var workout = await _context.Workouts.FindAsync(id);
+            if (id != workout.Id)
+            {
+                return BadRequest();
+            }
+            workoutUpdates.ApplyTo(workout);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!WorkoutExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
             return NoContent();
         }
 

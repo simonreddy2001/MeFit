@@ -11,67 +11,67 @@ using Microsoft.AspNetCore.JsonPatch;
 
 namespace MeFit.Controllers
 {
-    [Route("api/v1/users")]
+    [Route("api/v1/programs")]
     [ApiController]
     [Produces(MediaTypeNames.Application.Json)]
     [Consumes(MediaTypeNames.Application.Json)]
     [ApiConventionType(typeof(DefaultApiConventions))]
-    public class UsersController : ControllerBase
+    public class ProgramsController : ControllerBase
     {
         private readonly MeFitDBContext _context;
 
-        public UsersController(MeFitDBContext context)
+        public ProgramsController(MeFitDBContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Programs
         /// <summary>
-        /// Get all Users
+        /// Get all Programs
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<Programs>>> GetPrograms()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Programs.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/Programs/5
         /// <summary>
-        /// Get User by Id
+        /// Get Programs by Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<Programs>> GetPrograms(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var programs = await _context.Programs.FindAsync(id);
 
-            if (user == null)
+            if (programs == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return programs;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Programs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         /// <summary>
-        /// Edit User by Id
+        /// Edit Programs by Id
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="user"></param>
+        /// <param name="programs"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutPrograms(int id, Programs programs)
         {
-            if (id != user.Id)
+            if (id != programs.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(programs).State = EntityState.Modified;
 
             try
             {
@@ -79,7 +79,7 @@ namespace MeFit.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!ProgramsExists(id))
                 {
                     return NotFound();
                 }
@@ -92,65 +92,65 @@ namespace MeFit.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Programs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         /// <summary>
-        /// Add User 
+        /// Add Programs
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="programs"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<Programs>> PostPrograms(Programs programs)
         {
-            _context.Users.Add(user);
+            _context.Programs.Add(programs);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            return CreatedAtAction("GetPrograms", new { id = programs.Id }, programs);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Programs/5
         /// <summary>
-        /// Delete User bby Id
+        /// Delete Programs by Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeletePrograms(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            var programs = await _context.Programs.FindAsync(id);
+            if (programs == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(user);
+            _context.Programs.Remove(programs);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
         /// <summary>
-        /// Patch the User
+        /// Patch the Programs
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="userUpdates"></param>
+        /// <param name="programUpdates"></param>
         /// <returns></returns>
         [HttpPatch("{id}")]
-        public async Task<ActionResult<User>> PatchUser(int id, JsonPatchDocument<User> userUpdates)
+        public async Task<ActionResult<Programs>> PatchPrograms(int id, JsonPatchDocument<Programs> programUpdates)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (id != user.Id)
+            var programs = await _context.Programs.FindAsync(id);
+            if (id != programs.Id)
             {
                 return BadRequest();
             }
-            userUpdates.ApplyTo(user);
+            programUpdates.ApplyTo(programs);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!ProgramsExists(id))
                 {
                     return NotFound();
                 }
@@ -161,9 +161,10 @@ namespace MeFit.Controllers
             }
             return NoContent();
         }
-        private bool UserExists(int id)
+
+        private bool ProgramsExists(int id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return _context.Programs.Any(e => e.Id == id);
         }
     }
 }

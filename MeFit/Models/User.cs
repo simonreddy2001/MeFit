@@ -14,8 +14,8 @@ namespace MeFit.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Role { get; set; } = "User";
-        public bool IsContributor { get; set; }
-        public bool IsAdmin { get; set; }
-        public Profile Profile { get; set; }
+        public bool IsContributor { get; set; } = false;
+        public bool IsAdmin { get; set; } = false;
+        public Profiles Profile { get; set; }
     }
 }

@@ -13,6 +13,6 @@ namespace MeFit.Models
         public int WorkoutId { get; set; }
         public Workout Workout { get; set; }
         public int ProgramId { get; set; }
-        public Program Program { get; set; }
+        public Programs Program { get; set; }
     }
 }

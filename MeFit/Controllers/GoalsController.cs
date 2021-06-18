@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MeFit.Models;
 using System.Net.Mime;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace MeFit.Controllers
 {
@@ -128,6 +129,38 @@ namespace MeFit.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Patch the goal
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="goalUpdates"></param>
+        /// <returns></returns>
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<Goal>> PatchExercise(int id, JsonPatchDocument<Goal> goalUpdates)
+        {
+            var goal = await _context.Goals.FindAsync(id);
+            if (id != goal.Id)
+            {
+                return BadRequest();
+            }
+            goalUpdates.ApplyTo(goal);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!GoalExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return NoContent();
+        }
         private bool GoalExists(int id)
         {
             return _context.Goals.Any(e => e.Id == id);

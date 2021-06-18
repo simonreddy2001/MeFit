@@ -61,7 +61,7 @@ namespace MeFit
                     ValidAudience = "account"
                 };
             });
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             
             services.AddSwaggerGen(c =>
             {
@@ -85,6 +85,7 @@ namespace MeFit
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+            services.AddAutoMapper(typeof(Startup));
             services.AddDbContext<MeFitDBContext>(
                 opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
