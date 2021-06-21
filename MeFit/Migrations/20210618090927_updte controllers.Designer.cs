@@ -4,14 +4,16 @@ using MeFit.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MeFit.Migrations
 {
     [DbContext(typeof(MeFitDBContext))]
-    partial class MeFitDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210618090927_updte controllers")]
+    partial class updtecontrollers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -467,7 +469,6 @@ namespace MeFit.Migrations
                             IsAdmin = false,
                             IsContributor = false,
                             LastName = "Rex",
-                            Password = "admin123",
                             Role = "Admin"
                         },
                         new
@@ -478,7 +479,6 @@ namespace MeFit.Migrations
                             IsAdmin = false,
                             IsContributor = false,
                             LastName = "Barkley",
-                            Password = "admin123",
                             Role = "Contributer, Admin"
                         },
                         new
@@ -489,7 +489,6 @@ namespace MeFit.Migrations
                             IsAdmin = false,
                             IsContributor = false,
                             LastName = "Crown Prince of Norway",
-                            Password = "admin123",
                             Role = "User, Contributer, Admin"
                         },
                         new
@@ -500,7 +499,6 @@ namespace MeFit.Migrations
                             IsAdmin = false,
                             IsContributor = false,
                             LastName = "Johansen",
-                            Password = "admin123",
                             Role = "User, Contributer, Admin"
                         },
                         new
@@ -511,7 +509,6 @@ namespace MeFit.Migrations
                             IsAdmin = false,
                             IsContributor = false,
                             LastName = "Ødegaard",
-                            Password = "admin123",
                             Role = "User, Contributer, Admin"
                         },
                         new
@@ -522,7 +519,6 @@ namespace MeFit.Migrations
                             IsAdmin = false,
                             IsContributor = false,
                             LastName = "Nordmann",
-                            Password = "admin123",
                             Role = "Contributer, Admin"
                         });
                 });

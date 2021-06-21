@@ -170,6 +170,7 @@ namespace MeFit.Models
                    FirstName = "Harald",
                    LastName = "Rex",
                    Email = "harald.rex@kongehuset.no",
+                   Password = "admin123",
                    Role = Role.Admin,
                    IsContributor = false,
                    IsAdmin = false
@@ -180,6 +181,7 @@ namespace MeFit.Models
                    FirstName = "Charles",
                    LastName = "Barkley",
                    Email = "charles.barkley@nba.com",
+                   Password = "admin123",
                    Role = Role.Contributer,
                    IsContributor = false,
                    IsAdmin = false
@@ -190,6 +192,7 @@ namespace MeFit.Models
                    FirstName = "Haakon Magnus",
                    LastName = "Crown Prince of Norway",
                    Email = "haakon.magnus@kongehuset.no",
+                   Password = "admin123",
                    Role = Role.User,
                    IsContributor = false,
                    IsAdmin = false
@@ -200,6 +203,7 @@ namespace MeFit.Models
                    FirstName = "Jan",
                    LastName = "Johansen",
                    Email = "j_johansen@hotmail.com",
+                   Password = "admin123",
                    Role = Role.User,
                    IsContributor = false,
                    IsAdmin = false
@@ -210,6 +214,7 @@ namespace MeFit.Models
                    FirstName = "Martin",
                    LastName = "Ødegaard",
                    Email = "martinmann@gmail.com",
+                   Password = "admin123",
                    Role = Role.User,
                    IsContributor = false,
                    IsAdmin = false
@@ -220,6 +225,7 @@ namespace MeFit.Models
                    FirstName = "Kari",
                    LastName = "Nordmann",
                    Email = "kari.nordmann@ciber.no",
+                   Password = "admin123",
                    Role = Role.Contributer,
                    IsContributor = false,
                    IsAdmin = false
