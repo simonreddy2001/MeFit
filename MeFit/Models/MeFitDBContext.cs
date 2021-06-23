@@ -26,8 +26,10 @@ namespace MeFit.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>(entity => { entity.HasIndex(e => e.Email).IsUnique(); });
             modelBuilder.Entity<ProgramWorkout>().HasKey(pw => new { pw.ProgramId, pw.WorkoutId });
             modelBuilder.Entity<GoalWorkout>().HasKey(gw => new { gw.GoalId, gw.WorkoutId });
+
 
             modelBuilder.Entity<Address>().HasData(
                new Address { Id = 1, AddressLine1 = "Drammensveien 1", City = "Oslo", Country = "Norway", PostalCode = 2700 },
@@ -42,6 +44,7 @@ namespace MeFit.Models
                new Models.Profiles
                {
                    Id = 1,
+                   Email = "kari.nordmann@ciber.no",
                    AddressId = 1,
                    UserId = 1,
                    Disabilities = "Dysleksia, transplanted hip",
@@ -54,6 +57,7 @@ namespace MeFit.Models
                    Id = 2,
                    AddressId = 2,
                    UserId = 2,
+                   Email = "charles.barkley@nba.com",
                    Disabilities = "",
                    MedicalConditions = "",
                    Weight = 114.5,
@@ -64,6 +68,7 @@ namespace MeFit.Models
                    Id = 3,
                    AddressId = 3,
                    UserId = 3,
+                   Email = "haakon.magnus@kongehuset.no",
                    Disabilities = "",
                    MedicalConditions = "",
                    Weight = 100.5,
@@ -74,6 +79,7 @@ namespace MeFit.Models
                    Id = 4,
                    AddressId = 4,
                    UserId = 4,
+                   Email = "j_johansen@hotmail.com",
                    Disabilities = "",
                    MedicalConditions = "",
                    Weight = 94.5,
@@ -84,6 +90,7 @@ namespace MeFit.Models
                    Id = 5,
                    AddressId = 5,
                    UserId = 5,
+                   Email = "martinmann@gmail.com",
                    Disabilities = "",
                    MedicalConditions = "",
                    Weight = 114.5,
@@ -94,6 +101,7 @@ namespace MeFit.Models
                    Id = 6,
                    AddressId = 6,
                    UserId = 6,
+                   Email = "kari.nordmann@ciber.no",
                    Disabilities = "",
                    MedicalConditions = "",
                    Weight = 62,
@@ -170,7 +178,6 @@ namespace MeFit.Models
                    FirstName = "Harald",
                    LastName = "Rex",
                    Email = "harald.rex@kongehuset.no",
-                   Password = "admin123",
                    Role = Role.Admin,
                    IsContributor = false,
                    IsAdmin = false
@@ -181,7 +188,6 @@ namespace MeFit.Models
                    FirstName = "Charles",
                    LastName = "Barkley",
                    Email = "charles.barkley@nba.com",
-                   Password = "admin123",
                    Role = Role.Contributer,
                    IsContributor = false,
                    IsAdmin = false
@@ -192,7 +198,6 @@ namespace MeFit.Models
                    FirstName = "Haakon Magnus",
                    LastName = "Crown Prince of Norway",
                    Email = "haakon.magnus@kongehuset.no",
-                   Password = "admin123",
                    Role = Role.User,
                    IsContributor = false,
                    IsAdmin = false
@@ -203,7 +208,6 @@ namespace MeFit.Models
                    FirstName = "Jan",
                    LastName = "Johansen",
                    Email = "j_johansen@hotmail.com",
-                   Password = "admin123",
                    Role = Role.User,
                    IsContributor = false,
                    IsAdmin = false
@@ -214,7 +218,6 @@ namespace MeFit.Models
                    FirstName = "Martin",
                    LastName = "Ødegaard",
                    Email = "martinmann@gmail.com",
-                   Password = "admin123",
                    Role = Role.User,
                    IsContributor = false,
                    IsAdmin = false
@@ -225,7 +228,6 @@ namespace MeFit.Models
                    FirstName = "Kari",
                    LastName = "Nordmann",
                    Email = "kari.nordmann@ciber.no",
-                   Password = "admin123",
                    Role = Role.Contributer,
                    IsContributor = false,
                    IsAdmin = false

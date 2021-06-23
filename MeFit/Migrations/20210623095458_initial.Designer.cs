@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeFit.Migrations
 {
     [DbContext(typeof(MeFitDBContext))]
-    [Migration("20210609115328_seededData")]
-    partial class seededData
+    [Migration("20210623095458_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -205,7 +205,7 @@ namespace MeFit.Migrations
                     b.ToTable("GoalWorkouts");
                 });
 
-            modelBuilder.Entity("MeFit.Models.Profile", b =>
+            modelBuilder.Entity("MeFit.Models.Profiles", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -216,6 +216,9 @@ namespace MeFit.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Disabilities")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("GoalId")
@@ -266,6 +269,7 @@ namespace MeFit.Migrations
                             Id = 1,
                             AddressId = 1,
                             Disabilities = "Dysleksia, transplanted hip",
+                            Email = "kari.nordmann@ciber.no",
                             Height = 187.0,
                             MedicalConditions = "Weak heart",
                             UserId = 1,
@@ -276,6 +280,7 @@ namespace MeFit.Migrations
                             Id = 2,
                             AddressId = 2,
                             Disabilities = "",
+                            Email = "charles.barkley@nba.com",
                             Height = 198.0,
                             MedicalConditions = "",
                             UserId = 2,
@@ -286,6 +291,7 @@ namespace MeFit.Migrations
                             Id = 3,
                             AddressId = 3,
                             Disabilities = "",
+                            Email = "haakon.magnus@kongehuset.no",
                             Height = 193.0,
                             MedicalConditions = "",
                             UserId = 3,
@@ -296,6 +302,7 @@ namespace MeFit.Migrations
                             Id = 4,
                             AddressId = 4,
                             Disabilities = "",
+                            Email = "j_johansen@hotmail.com",
                             Height = 187.0,
                             MedicalConditions = "",
                             UserId = 4,
@@ -306,6 +313,7 @@ namespace MeFit.Migrations
                             Id = 5,
                             AddressId = 5,
                             Disabilities = "",
+                            Email = "martinmann@gmail.com",
                             Height = 198.0,
                             MedicalConditions = "",
                             UserId = 5,
@@ -316,6 +324,7 @@ namespace MeFit.Migrations
                             Id = 6,
                             AddressId = 6,
                             Disabilities = "",
+                            Email = "kari.nordmann@ciber.no",
                             Height = 170.0,
                             MedicalConditions = "",
                             UserId = 6,
@@ -323,7 +332,25 @@ namespace MeFit.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MeFit.Models.Program", b =>
+            modelBuilder.Entity("MeFit.Models.ProgramWorkout", b =>
+                {
+                    b.Property<int>("ProgramId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkoutId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProgramId", "WorkoutId");
+
+                    b.HasIndex("WorkoutId");
+
+                    b.ToTable("ProgramWorkouts");
+                });
+
+            modelBuilder.Entity("MeFit.Models.Programs", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -353,24 +380,6 @@ namespace MeFit.Migrations
                             Category = "Nomal people less chest",
                             Name = "Basic Chest Program"
                         });
-                });
-
-            modelBuilder.Entity("MeFit.Models.ProgramWorkout", b =>
-                {
-                    b.Property<int>("ProgramId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WorkoutId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProgramId", "WorkoutId");
-
-                    b.HasIndex("WorkoutId");
-
-                    b.ToTable("ProgramWorkouts");
                 });
 
             modelBuilder.Entity("MeFit.Models.Set", b =>
@@ -436,7 +445,7 @@ namespace MeFit.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -454,6 +463,10 @@ namespace MeFit.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
 
                     b.ToTable("Users");
 
@@ -581,7 +594,7 @@ namespace MeFit.Migrations
                     b.Navigation("Workout");
                 });
 
-            modelBuilder.Entity("MeFit.Models.Profile", b =>
+            modelBuilder.Entity("MeFit.Models.Profiles", b =>
                 {
                     b.HasOne("MeFit.Models.Address", "Address")
                         .WithMany("Profiles")
@@ -591,7 +604,7 @@ namespace MeFit.Migrations
                         .WithMany()
                         .HasForeignKey("GoalId");
 
-                    b.HasOne("MeFit.Models.Program", "Program")
+                    b.HasOne("MeFit.Models.Programs", "Program")
                         .WithMany("Profiles")
                         .HasForeignKey("ProgramId");
 
@@ -601,7 +614,7 @@ namespace MeFit.Migrations
 
                     b.HasOne("MeFit.Models.User", "User")
                         .WithOne("Profile")
-                        .HasForeignKey("MeFit.Models.Profile", "UserId");
+                        .HasForeignKey("MeFit.Models.Profiles", "UserId");
 
                     b.HasOne("MeFit.Models.Workout", "Workout")
                         .WithMany("Profiles")
@@ -622,7 +635,7 @@ namespace MeFit.Migrations
 
             modelBuilder.Entity("MeFit.Models.ProgramWorkout", b =>
                 {
-                    b.HasOne("MeFit.Models.Program", "Program")
+                    b.HasOne("MeFit.Models.Programs", "Program")
                         .WithMany()
                         .HasForeignKey("ProgramId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -673,7 +686,7 @@ namespace MeFit.Migrations
                     b.Navigation("GoalWorkouts");
                 });
 
-            modelBuilder.Entity("MeFit.Models.Program", b =>
+            modelBuilder.Entity("MeFit.Models.Programs", b =>
                 {
                     b.Navigation("Profiles");
                 });

@@ -161,6 +161,31 @@ namespace MeFit.Controllers
             }
             return NoContent();
         }
+        /// <summary>
+        /// Get profile by email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        [HttpGet("profiles/{email}")]
+        public async Task<ActionResult<Models.Profiles>> GetProfileByEmail(string email)
+
+        {
+            //start doing model validation. no point doing anything if the email passed in is empty ....
+            if (string.IsNullOrEmpty(email))
+            {
+                //return something appropriate for your project
+            }
+            //New action condition
+            //To get employee records
+            var table = from a in _context.Profiles
+                        where a.Email == email
+                        select a;
+            if (table == null)
+            {
+                return NotFound();
+            }
+            return Ok(table);
+        }
         private bool ProfileExists(int id)
         {
             return _context.Profiles.Any(e => e.Id == id);

@@ -21,7 +21,7 @@ namespace MeFit.Controllers
     public class ExercisesController : ControllerBase
     {
         private readonly MeFitDBContext _context;
-
+        
         public ExercisesController(MeFitDBContext context)
         {
             _context = context;
@@ -32,7 +32,7 @@ namespace MeFit.Controllers
         /// Get all Exercises
         /// </summary>
         /// <returns></returns>
-        
+       
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Exercise>>> GetExercises()
         {

@@ -216,6 +216,9 @@ namespace MeFit.Migrations
                     b.Property<string>("Disabilities")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("GoalId")
                         .HasColumnType("int");
 
@@ -264,6 +267,7 @@ namespace MeFit.Migrations
                             Id = 1,
                             AddressId = 1,
                             Disabilities = "Dysleksia, transplanted hip",
+                            Email = "kari.nordmann@ciber.no",
                             Height = 187.0,
                             MedicalConditions = "Weak heart",
                             UserId = 1,
@@ -274,6 +278,7 @@ namespace MeFit.Migrations
                             Id = 2,
                             AddressId = 2,
                             Disabilities = "",
+                            Email = "charles.barkley@nba.com",
                             Height = 198.0,
                             MedicalConditions = "",
                             UserId = 2,
@@ -284,6 +289,7 @@ namespace MeFit.Migrations
                             Id = 3,
                             AddressId = 3,
                             Disabilities = "",
+                            Email = "haakon.magnus@kongehuset.no",
                             Height = 193.0,
                             MedicalConditions = "",
                             UserId = 3,
@@ -294,6 +300,7 @@ namespace MeFit.Migrations
                             Id = 4,
                             AddressId = 4,
                             Disabilities = "",
+                            Email = "j_johansen@hotmail.com",
                             Height = 187.0,
                             MedicalConditions = "",
                             UserId = 4,
@@ -304,6 +311,7 @@ namespace MeFit.Migrations
                             Id = 5,
                             AddressId = 5,
                             Disabilities = "",
+                            Email = "martinmann@gmail.com",
                             Height = 198.0,
                             MedicalConditions = "",
                             UserId = 5,
@@ -314,6 +322,7 @@ namespace MeFit.Migrations
                             Id = 6,
                             AddressId = 6,
                             Disabilities = "",
+                            Email = "kari.nordmann@ciber.no",
                             Height = 170.0,
                             MedicalConditions = "",
                             UserId = 6,
@@ -434,7 +443,7 @@ namespace MeFit.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -448,13 +457,14 @@ namespace MeFit.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
 
                     b.ToTable("Users");
 
@@ -467,7 +477,6 @@ namespace MeFit.Migrations
                             IsAdmin = false,
                             IsContributor = false,
                             LastName = "Rex",
-                            Password = "admin123",
                             Role = "Admin"
                         },
                         new
@@ -478,7 +487,6 @@ namespace MeFit.Migrations
                             IsAdmin = false,
                             IsContributor = false,
                             LastName = "Barkley",
-                            Password = "admin123",
                             Role = "Contributer, Admin"
                         },
                         new
@@ -489,7 +497,6 @@ namespace MeFit.Migrations
                             IsAdmin = false,
                             IsContributor = false,
                             LastName = "Crown Prince of Norway",
-                            Password = "admin123",
                             Role = "User, Contributer, Admin"
                         },
                         new
@@ -500,7 +507,6 @@ namespace MeFit.Migrations
                             IsAdmin = false,
                             IsContributor = false,
                             LastName = "Johansen",
-                            Password = "admin123",
                             Role = "User, Contributer, Admin"
                         },
                         new
@@ -511,7 +517,6 @@ namespace MeFit.Migrations
                             IsAdmin = false,
                             IsContributor = false,
                             LastName = "Ødegaard",
-                            Password = "admin123",
                             Role = "User, Contributer, Admin"
                         },
                         new
@@ -522,7 +527,6 @@ namespace MeFit.Migrations
                             IsAdmin = false,
                             IsContributor = false,
                             LastName = "Nordmann",
-                            Password = "admin123",
                             Role = "Contributer, Admin"
                         });
                 });

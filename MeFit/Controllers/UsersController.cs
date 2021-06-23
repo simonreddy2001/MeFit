@@ -102,10 +102,14 @@ namespace MeFit.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            var userWithSameEmail = _context.Users.Where(m => m.Email == user.Email).SingleOrDefault(); //checking if the emailid already exits for any user
+            if (userWithSameEmail == null)
+            {
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+                return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            }
+            return BadRequest();
         }
 
         // DELETE: api/Users/5
@@ -160,6 +164,32 @@ namespace MeFit.Controllers
                 }
             }
             return NoContent();
+        }
+
+        /// <summary>
+        /// Get user by email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        [HttpGet("users/{email}")]
+        public async Task<ActionResult<User>> GetUserByEmail(string email)
+        
+        {
+            //start doing model validation. no point doing anything if the email passed in is empty ....
+            if (string.IsNullOrEmpty(email))
+            {
+                //return something appropriate for your project
+            }
+            //New action condition
+            //To get employee records
+            var table =  from a in _context.Users
+                        where a.Email == email
+                        select a;
+            if (table == null)
+            {
+                return NotFound();
+            }
+            return Ok( table);
         }
         private bool UserExists(int id)
         {
