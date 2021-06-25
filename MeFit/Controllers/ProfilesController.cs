@@ -161,6 +161,30 @@ namespace MeFit.Controllers
             }
             return NoContent();
         }
+
+        /// <summary>
+        /// Execute a partial update of the corresponding Profile
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="profileUpdates"></param>
+        /// <returns></returns>
+        [HttpPatch("profiles/{email}")]
+        public async Task<ActionResult<Models.Profiles>> PatchEmailProfile(string email, JsonPatchDocument<Models.Profiles> profileUpdates)
+        {
+            //var profile =  _context.Profiles.FindAsync(email);
+            var profile = _context.Profiles.Where(p => p.Email == email).First();
+            
+            if (email != profile.Email)
+            {
+                return BadRequest();
+            }
+           
+            profileUpdates.ApplyTo(profile, ModelState);
+           
+            return Ok(profile);
+        }
+
+       
         /// <summary>
         /// Get profile by email
         /// </summary>
@@ -189,6 +213,11 @@ namespace MeFit.Controllers
         private bool ProfileExists(int id)
         {
             return _context.Profiles.Any(e => e.Id == id);
+        }
+
+        private bool ProfileEmailExists(string email)
+        {
+            return _context.Profiles.Any(e => e.Email == email);
         }
     }
 }
