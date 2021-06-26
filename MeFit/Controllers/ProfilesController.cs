@@ -163,9 +163,9 @@ namespace MeFit.Controllers
         }
 
         /// <summary>
-        /// Execute a partial update of the corresponding Profile
+        /// Execute a partial update of the corresponding Profile by using email
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="email"></param>
         /// <param name="profileUpdates"></param>
         /// <returns></returns>
         [HttpPatch("profiles/{email}")]
@@ -180,7 +180,7 @@ namespace MeFit.Controllers
             }
            
             profileUpdates.ApplyTo(profile, ModelState);
-           
+            await _context.SaveChangesAsync();
             return Ok(profile);
         }
 

@@ -44,7 +44,7 @@ namespace MeFit.Models
                new Models.Profiles
                {
                    Id = 1,
-                   Email = "kari.nordmann@ciber.no",
+                   Email = "simon.reddy2001@gmail.com",
                    AddressId = 1,
                    UserId = 1,
                    Disabilities = "Dysleksia, transplanted hip",
@@ -57,7 +57,7 @@ namespace MeFit.Models
                    Id = 2,
                    AddressId = 2,
                    UserId = 2,
-                   Email = "charles.barkley@nba.com",
+                   Email = "simon.reddy2009@gmail.com",
                    Disabilities = "",
                    MedicalConditions = "",
                    Weight = 114.5,
@@ -177,7 +177,7 @@ namespace MeFit.Models
                    Id = 1,
                    FirstName = "Harald",
                    LastName = "Rex",
-                   Email = "harald.rex@kongehuset.no",
+                   Email = "simon.reddy2001@gmail.com",
                    Role = Role.Admin,
                    IsContributor = false,
                    IsAdmin = false
@@ -187,7 +187,7 @@ namespace MeFit.Models
                    Id = 2,
                    FirstName = "Charles",
                    LastName = "Barkley",
-                   Email = "charles.barkley@nba.com",
+                   Email = "simon.reddy2009@gmail.com",
                    Role = Role.Contributer,
                    IsContributor = false,
                    IsAdmin = false

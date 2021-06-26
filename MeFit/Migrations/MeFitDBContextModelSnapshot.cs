@@ -267,7 +267,7 @@ namespace MeFit.Migrations
                             Id = 1,
                             AddressId = 1,
                             Disabilities = "Dysleksia, transplanted hip",
-                            Email = "kari.nordmann@ciber.no",
+                            Email = "simon.reddy2001@gmail.com",
                             Height = 187.0,
                             MedicalConditions = "Weak heart",
                             UserId = 1,
@@ -278,7 +278,7 @@ namespace MeFit.Migrations
                             Id = 2,
                             AddressId = 2,
                             Disabilities = "",
-                            Email = "charles.barkley@nba.com",
+                            Email = "simon.reddy2009@gmail.com",
                             Height = 198.0,
                             MedicalConditions = "",
                             UserId = 2,
@@ -472,7 +472,7 @@ namespace MeFit.Migrations
                         new
                         {
                             Id = 1,
-                            Email = "harald.rex@kongehuset.no",
+                            Email = "simon.reddy2001@gmail.com",
                             FirstName = "Harald",
                             IsAdmin = false,
                             IsContributor = false,
@@ -482,7 +482,7 @@ namespace MeFit.Migrations
                         new
                         {
                             Id = 2,
-                            Email = "charles.barkley@nba.com",
+                            Email = "simon.reddy2009@gmail.com",
                             FirstName = "Charles",
                             IsAdmin = false,
                             IsContributor = false,

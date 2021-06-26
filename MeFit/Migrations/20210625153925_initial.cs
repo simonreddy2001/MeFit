@@ -284,8 +284,8 @@ namespace MeFit.Migrations
                 columns: new[] { "Id", "Email", "FirstName", "IsAdmin", "IsContributor", "LastName", "Role" },
                 values: new object[,]
                 {
-                    { 1, "harald.rex@kongehuset.no", "Harald", false, false, "Rex", "Admin" },
-                    { 2, "charles.barkley@nba.com", "Charles", false, false, "Barkley", "Contributer, Admin" },
+                    { 1, "simon.reddy2001@gmail.com", "Harald", false, false, "Rex", "Admin" },
+                    { 2, "simon.reddy2009@gmail.com", "Charles", false, false, "Barkley", "Contributer, Admin" },
                     { 3, "haakon.magnus@kongehuset.no", "Haakon Magnus", false, false, "Crown Prince of Norway", "User, Contributer, Admin" },
                     { 4, "j_johansen@hotmail.com", "Jan", false, false, "Johansen", "User, Contributer, Admin" },
                     { 5, "martinmann@gmail.com", "Martin", false, false, "Ødegaard", "User, Contributer, Admin" },
@@ -306,8 +306,8 @@ namespace MeFit.Migrations
                 columns: new[] { "Id", "AddressId", "Disabilities", "Email", "GoalId", "Height", "MedicalConditions", "ProgramId", "SetId", "UserId", "Weight", "WorkoutId" },
                 values: new object[,]
                 {
-                    { 1, 1, "Dysleksia, transplanted hip", "kari.nordmann@ciber.no", null, 187.0, "Weak heart", null, null, 1, 94.5, null },
-                    { 2, 2, "", "charles.barkley@nba.com", null, 198.0, "", null, null, 2, 114.5, null },
+                    { 1, 1, "Dysleksia, transplanted hip", "simon.reddy2001@gmail.com", null, 187.0, "Weak heart", null, null, 1, 94.5, null },
+                    { 2, 2, "", "simon.reddy2009@gmail.com", null, 198.0, "", null, null, 2, 114.5, null },
                     { 3, 3, "", "haakon.magnus@kongehuset.no", null, 193.0, "", null, null, 3, 100.5, null },
                     { 4, 4, "", "j_johansen@hotmail.com", null, 187.0, "", null, null, 4, 94.5, null },
                     { 5, 5, "", "martinmann@gmail.com", null, 198.0, "", null, null, 5, 114.5, null },
